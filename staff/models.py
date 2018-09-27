@@ -27,16 +27,24 @@ class Staff(models.Model):
     )
 
     rank = models.CharField(
+        verbose_name=('Звание'),
         max_length=64, 
         choices=RANK_CHOICES, 
         default=SOLDIER,
     )
-    position = models.CharField(max_length=64)
-    first_name = models.CharField(max_length=32)
-    last_name = models.CharField(max_length=32)
-    middle_name = models.CharField(max_length=32)
-    receipt_date = models.DateField()
-    promotion_date = models.DateField()
-    rebuke = models.BooleanField()
+    position = models.CharField(verbose_name=('Должность'), max_length=64)
+    last_name = models.CharField(verbose_name=('Фамилия'), max_length=32)
+    first_name = models.CharField(verbose_name=('Имя'), max_length=32)
+    middle_name = models.CharField(verbose_name=('Отчество'), max_length=32)
+    receipt_date = models.DateField(verbose_name=('Дата получения звания'))
+    promotion_date = models.DateField(verbose_name=('Дата повышение'))
+    rebuke = models.BooleanField(verbose_name=('Есть ли Выговор?'))
+
+    def __str__(self):
+        return self.last_name + ' ' + self.first_name + ' ' + self.middle_name
+
+    class Meta:
+        verbose_name = 'Сотрудник'
+        verbose_name_plural = 'Сотрудники'
 
 
